@@ -1,11 +1,14 @@
 
+from dotenv import load_dotenv
+import os
 
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer import DocumentAnalysisClient
 
+load_dotenv(dotenv_path='.env')
 
-endpoint = "YOUR_FORM_RECOGNIZER_ENDPOINT"
-key = "YOUR_FORM_RECOGNIZER_KEY"
+endpoint = os.getenv("FORM_RECOGNIZER_ENDPOINT")
+key = os.getenv("FORM_RECOGNIZER_KEY")
 
 # sample document
 url = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/main/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/receipt/contoso-receipt.png"

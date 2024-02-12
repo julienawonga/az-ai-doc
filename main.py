@@ -11,14 +11,14 @@ endpoint = os.getenv("FORM_RECOGNIZER_ENDPOINT")
 key = os.getenv("FORM_RECOGNIZER_KEY")
 
 # sample document
-url = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/main/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/receipt/contoso-receipt.png"
-
+url = "https://raw.githubusercontent.com/julienawonga/az-ai-doc/main/carrfour.jpg"
 document_analysis_client = DocumentAnalysisClient(
     endpoint=endpoint, credential=AzureKeyCredential(key)
 )
 
 poller = document_analysis_client.begin_analyze_document_from_url("prebuilt-receipt", url)
 receipts = poller.result()
+
 
 for idx, receipt in enumerate(receipts.documents):
     print("--------Recognizing receipt #{}--------".format(idx + 1))
@@ -38,7 +38,7 @@ for idx, receipt in enumerate(receipts.documents):
     if transaction_date:
         print(
             "Transaction Date: {} has confidence: {}".format(
-                transaction_date.value, transaction_date.confidence
+                transaction_date.content, transaction_date.confidence
             )
         )
     if receipt.fields.get("Items"):
